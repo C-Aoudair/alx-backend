@@ -10,7 +10,7 @@ class LFUCache(BaseCaching):
 
     def __init__(self):
         super().__init__()
-        self.keys_frequency = {}
+        self.key_history = {}
 
     def put(self, key, item):
         """Add item to self.cache_data dictionary."""
@@ -18,23 +18,21 @@ class LFUCache(BaseCaching):
             return
 
         if key in self.cache_data:
-            self.cache_data.pop(key)
+            self.key_history[key] += 1
 
-        elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            lfu_key = min(self.keys_frequency, key=self.keys_frequency.get)
-            print(f"DISCARD: {lfu_key}")
-            self.cache_data.pop(lfu_key)
-            self.keys_frequency.pop(lfu_key)
-
-        self.cache_data[key] = item
-        if key not in self.keys_frequency:
-            self.keys_frequency[key] = 1
         else:
-            self.keys_frequency[key] += 1
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                lfu_key = min(self.key_history, key=self.key_history.get)
+                print(f"DISCARD: {lfu_key}")
+                self.cache_data.pop(lfu_key)
+                self.key_history.pop(lfu_key)
+
+            self.cache_data[key] = item
+            self.key_history[key] = 1
 
     def get(self, key):
         """Return the value in self.cache_data linked to key."""
         value = self.cache_data.get(key)
         if value:
-            self.keys_frequency[key] += 1
+            self.key_history[key] += 1
         return value

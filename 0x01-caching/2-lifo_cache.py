@@ -26,6 +26,7 @@ class LIFOCache(BaseCaching):
 
         self.cache_data[key] = item
 
+
     def get(self, key):
         """Return the value in self.cache_data linked to key."""
         return self.cache_data.get(key)

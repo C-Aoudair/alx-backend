@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Contains BasicCache Class that inherits from BaseCaching class.
 """
 

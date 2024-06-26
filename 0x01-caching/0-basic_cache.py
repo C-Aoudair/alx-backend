@@ -2,7 +2,8 @@
 """ Contains BasicCache Class that inherits from BaseCaching class.
 """
 
-from BaseCaching import BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
+
 
 class BasicCache(BaseCaching):
     """ a simple caching system"""

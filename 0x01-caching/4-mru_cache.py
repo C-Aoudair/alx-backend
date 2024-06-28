@@ -20,7 +20,7 @@ class MRUCache(BaseCaching):
             self.cache_data.pop(key)
 
         elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            last_key = next(reversed(self.cache_data))
+            last_key = list(self.cache_data.keys())[-1]
             print(f"DISCARD: {last_key}")
             self.cache_data.pop(last_key)
 

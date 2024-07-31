@@ -1,7 +1,6 @@
 import { createClient } from "redis";
 import { promisify } from "util";
 import express from "express";
-import { get } from "request";
 
 const listProducts = [
   { id: 1, name: "Suitcase 250", price: 50, stock: 4 },
